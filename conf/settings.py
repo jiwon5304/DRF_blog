@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,5 +143,33 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 커스텀 유저 모델 등록
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'conf.backends.JWTAuthentication',
+    ),
+    'NON_FIELD_ERRORS_KEY': 'error',
+    # 'DEFAULT_PAGINATION_CLASS': 'conf.paginations.CustomPagination',
+    # 'PAGE_SIZE': 20,
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_SECRET_KEY': SECRET_KEY,
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',
+    # 토큰 새로 고침 기능을 활성화합니다
+    'JWT_ALLOW_REFRESH': False,
+    'JWT_ALGORITHM': 'HS512',
+    # 토큰 만료 시간 설정
+    'JWT_VERIFY_EXPIRATION': True,
+    'JWT_EXPIRATION_DELTA': timedelta(days=5)
+}
 
 
