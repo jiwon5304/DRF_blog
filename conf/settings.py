@@ -153,8 +153,8 @@ REST_FRAMEWORK = {
         'conf.backends.JWTAuthentication',
     ),
     'NON_FIELD_ERRORS_KEY': 'error',
-    # 'DEFAULT_PAGINATION_CLASS': 'conf.paginations.CustomPagination',
-    # 'PAGE_SIZE': 20,
+    'DEFAULT_PAGINATION_CLASS': 'conf.paginations.CustomPagination',
+    'PAGE_SIZE': 20,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
