@@ -32,7 +32,7 @@ class SoftDeleteModel(models.Model):
     
     def delete(self, using=None, keep_parents=False):
         self.deleted_at = timezone.now()
-        self.save(updated_fields=['deleted_at'])
+        self.save(update_fields=['deleted_at'])
     
     # 삭제된 레코드를 복구
     def restore(self):

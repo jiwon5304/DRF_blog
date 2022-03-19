@@ -60,3 +60,11 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at'
         )
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'name',
+        )
