@@ -1,5 +1,5 @@
 from django.db.models import Q
-from rest_framework import status, viewsets, generics
+from rest_framework import status, viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.exceptions import NotFound

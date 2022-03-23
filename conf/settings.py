@@ -148,15 +148,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
+    # 접근권한 설정: 인증된 사용자만 접근가능
     'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
+    # conf.backends.JWTAuthentication 에 근거하여 http 요청의 인증을 처리
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'conf.backends.JWTAuthentication',
     ),
     'NON_FIELD_ERRORS_KEY': 'error',
+    # 페이징 처리할 클래스
     'DEFAULT_PAGINATION_CLASS': 'conf.paginations.CustomPagination',
+    # 한 페이지 당 갯수
     'PAGE_SIZE': 20,
     'DEFAULT_RENDERER_CLASSES': (
+        # API 호출에 대한 응답
         'rest_framework.renderers.JSONRenderer',
+        # 웹 브라우저에서 보여지는 화면
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
 }
@@ -169,6 +175,7 @@ JWT_AUTH = {
     'JWT_ALGORITHM': 'HS512',
     # 토큰 만료 시간 설정
     'JWT_VERIFY_EXPIRATION': True,
+    # 토큰 유효기간: 5일
     'JWT_EXPIRATION_DELTA': timedelta(days=5)
 }
 

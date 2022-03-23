@@ -6,11 +6,15 @@ from .models import User
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
+    #1. W,R 다 해야 하는 필드는 모델에만 정의
+    #2. W만 해야하는 필드(ex.password, ForeignKey 필드의 아이디)는 따로 정의: password = serializers.CharField(write_only = True)
+    #3. R만 할 필드는 serializer에서 정의하는 필드는 serializers.ReadOnlyField(source='필드명.필드명')
     email = serializers.EmailField(
         max_length=255,
         validators=[UniqueValidator(queryset=User.objects.all())]
     )
     name = serializers.CharField(max_length=100)
+    # password 같은 경우는 모델에서 규칙을 정의해주는 부분이 없으므로 시리얼라이저에서 꼭 필요
     password = serializers.CharField(
         max_length=128,
         min_length=8,

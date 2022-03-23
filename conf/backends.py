@@ -8,7 +8,7 @@ AUTH_HEADER_PREFIX = ['Bearer']
 
 class JWTAuthentication(authentication.BaseAuthentication):
     
-    def authenticate(self, request):
+    def authenticate(self, request: object) -> object:
         request.user = None
         auth_header = authentication.get_authorization_header(request).split()
         

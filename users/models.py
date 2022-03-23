@@ -8,6 +8,7 @@ from conf.models import BaseModel, SoftDeleteModel
 
 # 유저를 생성할 때 사용하는 헬퍼(Helper) 클래스
 class UserManager(BaseUserManager):
+    # to do: alive_only 뭐지..
     def __init__(self, *args, **kwargs):
         self.alive_only = kwargs.pop('alive_only', True)
         super(UserManager, self).__init__(*args, **kwargs)
@@ -61,6 +62,7 @@ class User(AbstractBaseUser, BaseModel, SoftDeleteModel):
         token = jwt.encode(
             payload,
             settings.SECRET_KEY,
+            # 'JWT_ALGORITHM': 'HS512'
             algorithm=settings.JWT_AUTH.get('JWT_ALGORITHM')
         )
         return token.decode()
